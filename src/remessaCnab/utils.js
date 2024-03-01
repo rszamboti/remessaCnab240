@@ -1,6 +1,6 @@
 export function converterTextoEmNumero(valor,tamanho) {
-        var valorString = removerAcentuacao(valor)
-        var numeroString = valorString.toString();
+        const valorString = String(valor);
+        var numeroString = removerAcentuacao(valorString);
         var zerosParaAdicionar = tamanho - numeroString.length;
         for (var i = 0; i < zerosParaAdicionar; i++) {
             numeroString = '0' + numeroString;
@@ -10,9 +10,13 @@ export function converterTextoEmNumero(valor,tamanho) {
 export function converterTextoEmString(texto,tamanho){
         var textoString = removerAcentuacao(texto);
         var numeroString = textoString.toString();
-        var zerosParaAdicionar = tamanho - numeroString.length;
+        var tamanhoString = numeroString.length;
+        if(tamanhoString >= tamanho){
+            return numeroString.substring(0,tamanho);
+        } 
+        var zerosParaAdicionar = tamanho - tamanhoString;
         for (var i = 0; i < zerosParaAdicionar; i++) {
-            numeroString = ' ' + numeroString;
+            numeroString = numeroString + ' ';
         }
         return numeroString;
     }

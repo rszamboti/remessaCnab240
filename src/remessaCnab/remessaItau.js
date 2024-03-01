@@ -5,8 +5,16 @@ export class RemessaItau {
     }
      buildHeader(EMPRESA){
         let data = new Date();
-        let dataHoje = data.getFullYear() + (data.getMonth() + 1) + data.getDate();
-        let horaHoje = data.getHours()+ data.getMinutes() + data.getSeconds();
+        let ano = data.getFullYear();
+        let mes = converterTextoEmNumero((data.getMonth() + 1),2);
+        let dia = data.getDate();
+        dia = converterTextoEmNumero(dia,2);
+        let dataHoje = `${dia}${mes}${ano}`
+        let hora = data.getHours()
+        let minuto = data.getMinutes() 
+        let segundo = data.getSeconds();
+        let horaHoje = `${hora}${minuto}${segundo}`	 
+        console.log(horaHoje)
         let header='';
         header = header.concat(converterTextoEmNumero(EMPRESA.banco,3)); // 001-003
         header = header.concat(converterTextoEmNumero('0',4)); // 004-007
@@ -18,9 +26,9 @@ export class RemessaItau {
         header = header.concat(converterTextoEmString('',20)); // 033-052
         header = header.concat(converterTextoEmNumero(EMPRESA.agencia,5)); // 053-057
         header = header.concat(converterTextoEmString('',1)); // 058-058
-        header = header.concat(converterTextoEmNumero(EMPRESA.conta,12)); // 059-070
-        header = header.concat(converterTextoEmNumero('',1)); // 071-071
-        header = header.concat(converterTextoEmNumero(EMPRESA.digito,1)); // 072-072
+        header = header.concat(converterTextoEmNumero(EMPRESA.contaCorrente,12)); // 059-070
+        header = header.concat(converterTextoEmString('',1)); // 071-071
+        header = header.concat(converterTextoEmString(EMPRESA.digito,1)); // 072-072
         header = header.concat(converterTextoEmString(EMPRESA.nome,30)); // 073-102
         header = header.concat(converterTextoEmString(nomebanco(EMPRESA.banco),30)); // 103-132
         header = header.concat(converterTextoEmString('',10)); // 133-142
@@ -50,9 +58,9 @@ export class RemessaItau {
         header = header.concat(converterTextoEmString('',20)); // 033-052
         header = header.concat(converterTextoEmNumero(EMPRESA.agencia,5)); // 053-057
         header = header.concat(converterTextoEmString('',1)); // 058-058
-        header = header.concat(converterTextoEmNumero(EMPRESA.conta,12)); // 059-070
-        header = header.concat(converterTextoEmNumero('',1)); // 071-071
-        header = header.concat(converterTextoEmNumero(EMPRESA.digito,1)); // 072-072
+        header = header.concat(converterTextoEmNumero(EMPRESA.contaCorrente,12)); // 059-070
+        header = header.concat(converterTextoEmString('',1)); // 071-071
+        header = header.concat(converterTextoEmString(EMPRESA.digito,1)); // 072-072
         header = header.concat(converterTextoEmString(EMPRESA.nome,30)); // 073-102
         header = header.concat(converterTextoEmString('',30)); // 103-132
         header = header.concat(converterTextoEmString('',10)); // 133-142
@@ -60,7 +68,7 @@ export class RemessaItau {
         header = header.concat(converterTextoEmString(EMPRESA.numero,5)); // 173-177
         header = header.concat(converterTextoEmString(EMPRESA.complemento,15)); // 178-192
         header = header.concat(converterTextoEmString(EMPRESA.cidade,20)); // 193-212
-        header = header.concat(converterTextoEmString(EMPRESA.cep,8)); // 213-220
+        header = header.concat(converterTextoEmNumero(EMPRESA.cep,8)); // 213-220
         header = header.concat(converterTextoEmString(EMPRESA.estado,2)); // 221-222
         header = header.concat(converterTextoEmString('',8)); // 223-230
         header = header.concat(converterTextoEmString('',10)); // 231-240
@@ -69,7 +77,11 @@ export class RemessaItau {
 
      buildDetalhesA(dados,controleSegmento,segmentoAtual,qtdDetalhes){
         let data = new Date();
-        let dataHoje = data.getFullYear() + (data.getMonth() + 1) + data.getDate();
+        let ano = data.getFullYear();
+        let mes = converterTextoEmNumero((data.getMonth() + 1),2);
+        let dia = data.getDate();
+        dia = converterTextoEmNumero(dia,2);
+        let dataHoje = `${dia}${mes}${ano}`
         let lote='';
         lote = lote.concat(converterTextoEmNumero('341',3)); // 001-003
         lote = lote.concat(converterTextoEmNumero(controleSegmento,4)); // 004-007
@@ -90,18 +102,19 @@ export class RemessaItau {
         lote = lote.concat(converterTextoEmNumero('0',3)); // 018-020
         lote = lote.concat(converterTextoEmNumero(dados.banco,3)); // 021-023
         if(dados.banco == '341' || dados.banco == '409'){
+            
             lote = lote.concat(converterTextoEmNumero('0',1));          // 024-024
             lote = lote.concat(converterTextoEmNumero(dados.agencia,4)); // 025-028
             lote = lote.concat(converterTextoEmString('',1));           // 029-029
-            lote = lote.concat(converterTextoEmNumero(dados.conta,12)); // 030-041
+            lote = lote.concat(converterTextoEmNumero(dados.contaCorrente,12)); // 030-041
             lote = lote.concat(converterTextoEmString('',1));           // 042-042
-            lote = lote.concat(converterTextoEmNumero(dados.digito,1)); // 043-043
+            lote = lote.concat(converterTextoEmNumero(dados.digitoConta,1)); // 043-043
         }else{
             lote = lote.concat(converterTextoEmNumero(dados.agencia,5)); // 024-028
             lote = lote.concat(converterTextoEmString('',1));           // 029-029
-            lote = lote.concat(converterTextoEmNumero(dados.conta,12)); // 030-041
+            lote = lote.concat(converterTextoEmNumero(dados.contaCorrente,12)); // 030-041
             lote = lote.concat(converterTextoEmString('',1));           // 042-042
-            lote = lote.concat(converterTextoEmNumero(dados.digito,1)); // 043-043
+            lote = lote.concat(converterTextoEmNumero(dados.digitoConta,1)); // 043-043
         }
         lote = lote.concat(converterTextoEmString(dados.favorecido,30)); // 044-073
         lote = lote.concat(converterTextoEmString(dados.nossonumero,20)); // 074-093
@@ -145,7 +158,7 @@ export class RemessaItau {
         }
         lote = lote.concat(converterTextoEmNumero(cod,1)); // 018-018
         lote = lote.concat(converterTextoEmNumero(dados.cpfcnpj,14)); // 019-032
-        lote = lote.concat(converterTextoEmNumero(dados.endereco,30)); // 033-062
+        lote = lote.concat(converterTextoEmString(dados.endereco,30)); // 033-062
         lote = lote.concat(converterTextoEmNumero(dados.numero,5)); // 063-067
         lote = lote.concat(converterTextoEmString(dados.complemento,15)); // 068-082
         lote = lote.concat(converterTextoEmString(dados.bairro,15)); // 083-097
@@ -164,7 +177,7 @@ export class RemessaItau {
         lote = lote.concat(converterTextoEmNumero('5',1)); // 008-008
         lote = lote.concat(converterTextoEmString('',9)); // 009-017
         lote = lote.concat(converterTextoEmNumero(qtdDetalhes,6)); // 018-023
-        lote = lote.concat(converterTextoEmNumero(valorFinal,18)); // 024-041
+        lote = lote.concat(converterTextoEmNumero(valorFinal.toFixed(2),18)); // 024-041
         lote = lote.concat(converterTextoEmNumero('0',18)); // 042-059
         lote = lote.concat(converterTextoEmString('',171)); // 060-230
         lote = lote.concat(converterTextoEmString('',10)); // 231-240
@@ -200,7 +213,7 @@ export class RemessaItau {
             lote += detalhes;
             valorFinal += parseFloat(element.valor);
         }
-        console.log('lote',lote)
+        //console.log('lote',lote)
         this.valorTotalArquivo += valorFinal;
         lote +=  this.buildTraillerLote(controleSegmento,qtdDetalhes,valorFinal) + "\n";
         totallinhas++;

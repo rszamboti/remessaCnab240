@@ -41,6 +41,7 @@ export class Remessacnab {
     
     build(){
         try{
+             this.totalLinhas++;
              this.buildHeader();
              this.buildLotes();
              this.buildTrailler();
@@ -58,17 +59,17 @@ export class Remessacnab {
 
     async buildTrailler(){
         // console.log('empresa',this.empresa)
-        this.arquivo = this.arquivo.concat(  this.remessa.buildTrailler(this.segmento,this.totalLinhas));
+        this.arquivo = this.arquivo.concat(  this.remessa.buildTrailler(this.controleSegmento,this.totalLinhas));
     }
      buildLotes(){
         Object.entries(this.dadosPgto).forEach(async (element) => {
-            this.segmento++;
+            this.controleSegmento++;
             let key = element[0];
             let value = element[1];
-            let lote =  this.remessa.buildLotes(this.empresa,this.segmento,key,this.totalLinhas,value);
+            let lote =  this.remessa.buildLotes(this.empresa,this.controleSegmento,key,this.totalLinhas,value);
             //console.log('lottt->',lote);
             this.arquivo += lote.remessa;
-            this.totalLinhas += lote.totallinhas;
+            this.totalLinhas = lote.totallinhas;
         })
     }
 
@@ -87,7 +88,7 @@ export class Remessacnab {
         if(EMPRESA.agencia == null || EMPRESA.agencia == undefined){
             throw new Error('Agencia obrigatorio');
         }
-        if(EMPRESA.conta == null || EMPRESA.conta == undefined){
+        if(EMPRESA.contaCorrente == null || EMPRESA.contaCorrente == undefined){
             throw new Error('Conta obrigatorio');  
         }
         if(EMPRESA.digito == null || EMPRESA.digito == undefined){
