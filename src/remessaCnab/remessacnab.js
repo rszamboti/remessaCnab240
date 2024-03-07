@@ -52,7 +52,7 @@ export class Remessacnab {
             console.log('error',error)
         }
     }
-     buildHeader(){
+    buildHeader(){
         // console.log('empresa',this.empresa)
         this.arquivo =  this.remessa.buildHeader(this.empresa);
     }
@@ -61,7 +61,7 @@ export class Remessacnab {
         // console.log('empresa',this.empresa)
         this.arquivo = this.arquivo.concat(  this.remessa.buildTrailler(this.controleSegmento,this.totalLinhas));
     }
-     buildLotes(){
+    buildLotes(){
         Object.entries(this.dadosPgto).forEach(async (element) => {
             this.controleSegmento++;
             let key = element[0];

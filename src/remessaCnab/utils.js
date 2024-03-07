@@ -36,3 +36,17 @@ export function nomebanco(banco){
             case '001': return 'BANCO DO BRASIL';
         }
     }
+export function extrair(Texto,Comeco,Fim){
+    if(Comeco >=1 && Fim <= 240){
+        let start = parseInt(Comeco) - 1;
+        let end = parseInt(Fim);
+        return Texto.toString().substring(start,end);
+    }
+    return '';
+}    
+export function convertValorRetorno(valor){
+    return parseFloat((parseFloat(valor) / 100).toFixed(2)).toFixed(2);
+}
+export function convertDataRetorno(data){
+    return data.substring(4,8) + '-' + data.substring(2,4) + '-' + data.substring(0,2);
+}
