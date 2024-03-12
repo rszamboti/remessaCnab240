@@ -23,7 +23,7 @@ const server = http.createServer(async (req, res) => {
             console.error('Erro ao escrever o arquivo:', err);
             res.statusCode = 500;
             res.end('Erro ao salvar o arquivo.');
-            return;
+            return; 
           }
     
           fs.readFile(nomeArquivo, (err, data) => {

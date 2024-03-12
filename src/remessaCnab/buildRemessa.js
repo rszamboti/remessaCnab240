@@ -4,10 +4,13 @@ export function buildRemessa(json) {
     //console.log(json)
     // console.log('buildRemessa');
     
-    remessacnab.populeEmpresa(json.EMPRESA);
-    json.DADOSPGTO.forEach(element => {
-        remessacnab.populeDadosPgto(element)
-    })
-    return remessacnab.build();
+        remessacnab.populeEmpresa(json.EMPRESA);
+        if(remessacnab.erros.length > 0){
+            return remessacnab.erros;
+        }
+        json.DADOSPGTO.forEach(element => {
+            remessacnab.populeDadosPgto(element)
+        })
+        return remessacnab.build();
 
 }

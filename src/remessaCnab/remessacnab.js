@@ -1,5 +1,6 @@
 import { converterTextoEmNumero,removerAcentuacao,nomebanco } from './utils.js';
 import { RemessaItau } from './remessaItau.js';
+import { RemessaBradesco } from './remessaBradesco.js';
 export class Remessacnab {
     constructor() {
         this.versao = '1.0.0';
@@ -9,20 +10,29 @@ export class Remessacnab {
         this.dadosPgto=[];
         this.bancoDoLote='';
         this.arquivo='';
+        this.erros='';
     }
     populeEmpresa(EMPRESA){
         this.#ValidarDados(EMPRESA);
+        if(this.erros.length>0){
+            return;
+        }
         this.bancoDoLote=converterTextoEmNumero(EMPRESA.banco);
-        this.remessa = new RemessaItau();
+        if(this.bancoDoLote == '341'){
+            this.remessa = new RemessaItau();    
+        }else if(this.bancoDoLote == '237'){
+            this.remessa = new RemessaBradesco();
+        }
+        
         this.empresa=EMPRESA;
     }
     populeDadosPgto(dado){        
         let banco = converterTextoEmNumero(dado.banco,3);
         let segmento = '41';
         /*
-        Itau - Segmento 
-        1 - conta corrente itau
-        5 - conta poupanca itau
+        Segmento 
+        1 - conta corrente proprio banco
+        5 - conta poupanca proprio banco
         41 - conta corrente outros banco
         */
         if(this.bancoDoLote == '341'){
@@ -33,6 +43,15 @@ export class Remessacnab {
                 segmento = '5';
             }
         }
+        if(this.bancoDoLote == '237'){
+            if(banco == '237' && dado.tipoconta == 'CC'){
+                segmento = '1';                    
+            }
+            if(banco == '237' && dado.tipoconta == 'CP'){
+                segmento = '5';                    
+            }
+        }
+
         if (!this.dadosPgto[segmento]) {
             this.dadosPgto[segmento] = [];
         }
@@ -77,28 +96,31 @@ export class Remessacnab {
  
     #ValidarDados(EMPRESA){
         if(EMPRESA.cnpj == null || EMPRESA.cnpj == undefined){
-            throw new Error('CNPJ obrigatorio');
+            this.erros = this.erros.concat('CNPJ obrigatorio');
+        }
+        if(EMPRESA.banco == null || EMPRESA.banco == undefined){
+            this.erros = this.erros.concat('Codigo Do Banco é obrigatorio');
         }
         if(EMPRESA.nome == null || EMPRESA.nome == undefined){
-            throw new Error('Nome Empresa obrigatorio');
+            this.erros = this.erros.concat('Nome Empresa obrigatorio');
         }
         if(EMPRESA.endereco == null || EMPRESA.endereco == undefined){
-            throw new Error('Endereco obrigatorio');
+            this.erros = this.erros.concat('Endereco obrigatorio');
         }
         if(EMPRESA.agencia == null || EMPRESA.agencia == undefined){
-            throw new Error('Agencia obrigatorio');
+            this.erros = this.erros.concat('Agencia obrigatorio');
         }
         if(EMPRESA.contaCorrente == null || EMPRESA.contaCorrente == undefined){
-            throw new Error('Conta obrigatorio');  
+            this.erros = this.erros.concat('Conta obrigatorio');  
         }
         if(EMPRESA.digito == null || EMPRESA.digito == undefined){
-            throw new Error('Digito obrigatorio');
+            this.erros = this.erros.concat('Digito obrigatorio');
         }
         if(EMPRESA.cep == null || EMPRESA.cep == undefined){
-            throw new Error('Cep obrigatorio');
+            this.erros = this.erros.concat('Cep obrigatorio');
         }
         if(EMPRESA.estado == null || EMPRESA.estado == undefined){
-            throw new Error('UF obrigatorio');
+            this.erros = this.erros.concat('UF obrigatorio');
         }
 
     }
