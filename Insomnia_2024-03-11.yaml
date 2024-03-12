@@ -1,0 +1,224 @@
+_type: export
+__export_format: 4
+__export_date: 2024-03-12T02:52:24.853Z
+__export_source: insomnia.desktop.app:v8.6.1
+resources:
+  - _id: req_7004711c6aac494789f13f4609ecef19
+    parentId: wrk_1585a770689043cf9451549053d57be3
+    modified: 1710211784238
+    created: 1701917208146
+    url: http://localhost:3000/remessacnab
+    name: Remessa
+    description: ""
+    method: POST
+    body:
+      mimeType: application/json
+      text: |-
+        {
+        	"EMPRESA":{
+        		"banco":"237",
+        		"cnpj":"12.345.678./0001-99",
+        		"tipoInscricao":"2",
+        		"convenio":"123456789",
+        		"tipoconta":"CC",
+        		"agencia":"1741",
+        		"agenciaDigito":"0",
+        		"contaCorrente":"005628",
+        		"digito":"-8",
+        		"nome":"Empresá Fulano LTDA--",
+        		"tipopagamento":"20",
+        		"endereco":"rua da empresa",
+        		"numero":"123",
+        		"complemento":"compl",
+        		"cidade":"cidadeEmpresa",
+        		"cep":"99.999-99",
+        		"estado":"PR",
+        		"numeroArquivo":"2"
+        	},
+        	"DADOSPGTO":[
+        		{"banco":"341",
+        		 "agencia":"0043",
+        		 "agenciaDigito":"0",
+        		 "contaCorrente":"05500",
+        		 "digitoConta":"2",
+        		 "tipoconta":"CC",
+        	 	 "valor":"100.00",
+         		 "nossonumero":"numerounico",
+        		 "favorecido":"nome do 523",
+        		 "cpfcnpj":"123.456.789-44",
+        		 "endereco":"rua da paz",
+        		 "numero":"123",
+        		 "bairro":"bairro",
+        		 "complemento":"compl",
+        		 "cidade":"cidadeEmpresa",
+        		 "cep":"99.999-99",
+        		 "estado":"PR",
+        		 "email":"email@email.com"
+        		},{
+        		 "banco":"237",
+        		 "agencia":"0001",
+        		 "agenciaDigito":"0",
+        		 "contaCorrente":"00012",
+        		 "digitoConta":"1",
+        		 "tipoconta":"CC",
+        	 	 "valor":"104.00",
+         		 "nossonumero":"numerounico2",
+        		 "favorecido":"nome do 12",
+        		 "cpfcnpj":"123.456.789-44",
+        		 "endereco":"rua da paz",
+        		 "numero":"123",
+        		 "bairro":"bairro",
+        		 "complemento":"compl",
+        		 "cidade":"cidadeEmpresa",
+        		 "cep":"99.999-99",
+        		 "estado":"PR",
+        		 "email":"email@email.com"			
+        		},{
+        		 "banco":"001",
+        		 "agencia":"0001",
+        		 "agenciaDigito":"0",
+        		 "contaCorrente":"00012",
+        		 "digitoConta":"1",
+        		 "tipoconta":"CC",
+        	 	 "valor":"854.00",
+         		 "nossonumero":"numerounico4",
+        		 "favorecido":"nome do 345",
+        		 "cpfcnpj":"123.456.789-44",
+        		 "endereco":"rua da paz",
+        		 "numero":"123",
+        		 "bairro":"bairro",
+        		 "complemento":"compl",
+        		 "cidade":"cidadeEmpresa",
+        		 "cep":"99.999-99",
+        		 "estado":"PR",
+        		 "email":"email@email.com"			
+        		},{
+        		 "banco":"237",
+        		 "agencia":"0011",
+        		 "agenciaDigito":"0",
+        		 "contaCorrente":"00512",
+        		 "digitoConta":"5",
+        	 	 "tipoconta":"CC",
+        		 "valor":"184.52",
+         		 "nossonumero":"numerounico2",
+        		 "favorecido":"nome do 6789",
+        		 "cpfcnpj":"000.000.000-00",
+        		 "endereco":"rua da paz",
+        		 "numero":"123",
+        		 "bairro":"bairro",
+        		 "complemento":"compl",
+        		 "cidade":"cidadeEmpresa",
+        		 "cep":"99.999-99",
+        		 "estado":"PR",
+        		 "email":"email@email.com"			
+        		}
+        	]
+        	
+        }
+    parameters: []
+    headers:
+      - name: Content-Type
+        value: application/json
+      - name: User-Agent
+        value: insomnia/8.4.5
+    authentication: {}
+    metaSortKey: -1701917208146
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: wrk_1585a770689043cf9451549053d57be3
+    parentId: null
+    modified: 1701916864146
+    created: 1701916864146
+    name: my-spec.yaml
+    description: ""
+    scope: design
+    _type: workspace
+  - _id: req_0274c8fd773e46faad5b64738ddd032c
+    parentId: wrk_1585a770689043cf9451549053d57be3
+    modified: 1709780549031
+    created: 1709689403195
+    url: http://localhost:3000/retornocnab
+    name: retorno
+    description: ""
+    method: POST
+    body:
+      mimeType: application/octet-stream
+      fileName: G:\Outros computadores\PC Bevicred\Desktop\SB17063A.RET
+    parameters:
+      - id: pair_f4b7006e911d463787d1489240527af6
+        name: ""
+        value: ""
+        description: ""
+    headers:
+      - name: Content-Type
+        value: application/octet-stream
+      - name: User-Agent
+        value: insomnia/8.4.5
+    authentication: {}
+    metaSortKey: -1701917208121
+    isPrivate: false
+    pathParameters: []
+    settingStoreCookies: true
+    settingSendCookies: true
+    settingDisableRenderRequestBody: false
+    settingEncodeUrl: true
+    settingRebuildPath: true
+    settingFollowRedirects: global
+    _type: request
+  - _id: env_65dd35228c3127cdea5042bc10b61a65c3270579
+    parentId: wrk_1585a770689043cf9451549053d57be3
+    modified: 1701917592343
+    created: 1701916864153
+    name: Base Environment
+    data: {}
+    dataPropertyOrder: {}
+    color: null
+    isPrivate: false
+    metaSortKey: 1701916864153
+    _type: environment
+  - _id: jar_65dd35228c3127cdea5042bc10b61a65c3270579
+    parentId: wrk_1585a770689043cf9451549053d57be3
+    modified: 1701916864158
+    created: 1701916864158
+    name: Default Jar
+    cookies: []
+    _type: cookie_jar
+  - _id: spc_49a2bd48c15c4004a99f4d1dfad48890
+    parentId: wrk_1585a770689043cf9451549053d57be3
+    modified: 1701917135293
+    created: 1701916898630
+    fileName: my-spec.yaml
+    contents: |
+      <!DOCTYPE html>
+      <html lang="en">
+      <head>
+      <meta charset="utf-8">
+      <title>Error</title>
+      </head>
+      <body>
+      <pre>Cannot GET /</pre>
+      </body>
+      </html>
+    contentType: yaml
+    _type: api_spec
+  - _id: env_f7774a92a9d24fa38a778f8f960e5703
+    parentId: env_65dd35228c3127cdea5042bc10b61a65c3270579
+    modified: 1701917599470
+    created: 1701917405278
+    name: New Environment
+    data:
+      base_url: http://localhost:3333
+    dataPropertyOrder:
+      "&":
+        - base_url
+    color: null
+    isPrivate: true
+    metaSortKey: 1701917405278
+    _type: environment
